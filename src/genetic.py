@@ -3,11 +3,18 @@ from population import Population
 from tour import Tour
 
 class GeneticAlg:
-    mutation_rate = 0.015
-    tournament_size = 5
-    elistism = True
+    mutation_rate = 0.0
+    tournament_size = 0
+    elistism = False
+    tour_size = 0
 
-    def tournament_selection(self, population: Population) -> Tour:
+    def __init__(self, mutation_rate: float, tournament_size: int, elistism: bool, tour_size: int):
+        self.mutation_rate = mutation_rate
+        self.tournament_size = tournament_size
+        self.elistism = elistism
+        self.tour_size = tour_size
+
+    def tournament_selection(self, population: 'Population') -> 'Tour':
         tournament = Population(self.tournament_size, False)
 
         for i in range(0, self.tournament_size):
@@ -18,7 +25,7 @@ class GeneticAlg:
 
         return fittest
 
-    def mutate(self, tour: Tour):
+    def mutate(self, tour: 'Tour'):
         for tour_index, city in enumerate(tour):
             if random() < self.mutation_rate:
                 second_tour_index = randint(0, tour.get_tour_size())
@@ -28,9 +35,8 @@ class GeneticAlg:
             tour.set_city(tour_index, second_city)
             tour.set_city(second_tour_index, city)
 
-
-    def crossover(self, father: Tour, mother: Tour) -> Tour:
-        child = Tour()
+    def crossover(self, father: 'Tour', mother: 'Tour') -> 'Tour':
+        child = Tour(self.tour_size)
         
         start_pos = randint(0, father.get_tour_size())
         end_pos = randint(0, father.get_tour_size())
@@ -52,7 +58,7 @@ class GeneticAlg:
 
         return child
 
-    def evolve_population(self, population: Population) -> Population:
+    def evolve_population(self, population: 'Population') -> 'Population':
         new_population = Population(population.get_population_size(), False)
         
         elistism_offset = 0

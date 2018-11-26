@@ -4,16 +4,16 @@ class Graph:
     visited_cities = []
     cities_file_count = 0
 
-    def add_city(self, city: City):
-        return self.visited_cities.append(city)
+    def add_city(self, city: 'City'):
+        self.visited_cities.append(city)
     
-    def get_city(self, index: int):
+    def get_city(self, index: int) -> 'City':
         return self.visited_cities[index]
     
-    def number_of_cities(self):
+    def number_of_cities(self) -> int:
         return len(self.visited_cities)
 
-    def init_with_coordenates_file(self, input_path: str):
+    def init_with_coordinates_file(self, input_path: str):
         input_file = open(input_path, "r")
         
         self.cities_file_count = int(input_file.readline())
