@@ -22,7 +22,7 @@ def main():
     print(f'Inicial guess for path size: {pop.get_fittest().get_distance}')
 
     # Evolve population
-    algorithm = GeneticAlg(MUTATION_RATE, TOURNAMENT_SIZE, ELITISM)
+    algorithm = GeneticAlg(MUTATION_RATE, TOURNAMENT_SIZE, ELITISM, graph.number_of_cities())
 
     for i in range(0, EVOLVE_ITERATIONS):
         pop = algorithm.evolve_population(pop)
