@@ -3,14 +3,14 @@ from graph import Graph
 
 # Represents a population of Tours, from which the optimal one will spawn and be chosen
 class Population:
-    tours = []
-
     # Initializes population
-    # 'initialise' flag may be 'False' when individual generation is not needed
-    # when 'initialize' flag is 'True', graph must exist 
-    def __init__(self, population_size: int, initialise: bool = True, graph: 'Graph' = None):
+    # 'initialise' flag may be 'False' when individual generation is not neededt 
+    def __init__(self, population_size: int, graph: 'Graph', initialise: bool = True):
+        self.tours = []
+
         for _ in range(0, population_size):
-            self.tours.append(Tour(graph.number_of_cities()))
+            newTour = Tour(graph.number_of_cities())
+            self.tours.append(newTour)
         if initialise:
             for tour in self.tours:
                 tour.generate_individual(graph)
@@ -25,7 +25,7 @@ class Population:
         for tour in self.tours:
             if tour.get_fitness() > fittest.get_fitness():
                 fittest = tour
-        return tour
+        return fittest
     
     # Returns the number of tours in population
     def get_population_size(self) -> int:

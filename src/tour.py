@@ -5,13 +5,13 @@ from graph import Graph
 # A individual in the population. Its a single candidade path for the 
 # traveling salesman in the graph.
 class Tour:
-    tour = []
-    fitness = 0
-    distance = 0
-
     # Initialize the tour with a array allocation
     def __init__(self, tour_size):
-        for _ in range(0, tour_size):
+        self.tour = []
+        self.fitness = 0
+        self.distance = 0
+
+        for i in range(0, tour_size):
             self.tour.append(None)
 
     # Creates a random tour
@@ -48,13 +48,17 @@ class Tour:
         if self.distance == 0:
             distance = 0
             for city_index, city in enumerate(self.tour):
-                print (f"{city_index}")
-                if city_index < len(self.tour):
+                if city_index + 1 < len(self.tour):
                     distance += city.distanceTo(self.tour[city_index+1])
-        self.distance = distance
-        return distance
+                else:
+                    distance += city.distanceTo(self.tour[0])
+            self.distance = distance
+        return self.distance
     
     # Checks if tour contains a city
     def contains_city(self, city: 'City') -> bool:
         return city in self.tour
+    
+    def get_tour_list(self) -> list:
+        return self.tour
         

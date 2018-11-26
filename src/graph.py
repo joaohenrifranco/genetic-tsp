@@ -1,8 +1,9 @@
 from city import City
 
 class Graph:
-    visited_cities = []
-    cities_file_count = 0
+    def __init__(self):
+        self.visited_cities = []
+        self.cities_file_count = 0
 
     def add_city(self, city: 'City'):
         self.visited_cities.append(city)
@@ -18,11 +19,11 @@ class Graph:
         
         self.cities_file_count = int(input_file.readline())
 
-        for line in input_file:
+        for index, line in enumerate(input_file):
             coord_list = line.split(" ")
             coord_list[1] = coord_list[1].split("\n")[0]
             
-            new_city = City(coord_list[0], coord_list[1])
+            new_city = City(int(coord_list[0]), int(coord_list[1]), index)
 
             self.add_city(new_city)
         
