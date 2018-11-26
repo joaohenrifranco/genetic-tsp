@@ -2,18 +2,24 @@ from city import City
 
 class Graph:
     def __init__(self):
-        self.visited_cities = []
+        self.cities_to_visit = []
         self.cities_file_count = 0
 
+    # Add city to the array
     def add_city(self, city: 'City'):
-        self.visited_cities.append(city)
+        self.cities_to_visit.append(city)
     
+    # Returns city from cities_to_visit array index
     def get_city(self, index: int) -> 'City':
-        return self.visited_cities[index]
+        return self.cities_to_visit[index]
     
+    # Returns total number of cities
     def number_of_cities(self) -> int:
-        return len(self.visited_cities)
+        return len(self.cities_to_visit)
 
+    # Reads a file with a first line with umber of vertices
+    # and all followig lines with x and y coodinates separated
+    # by space
     def init_with_coordinates_file(self, input_path: str):
         input_file = open(input_path, "r")
         
