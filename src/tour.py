@@ -1,20 +1,25 @@
 from random import shuffle
 from city import City
+from graph import Graph
 
 class Tour:
     tour = []
     fitness = 0
     distance = 0
 
-    def __init__(self, graph):
-        for _ in graph:
-            self.tour.append()
+    def __init__(self, graph: Graph = None, tour: list = None):
+        # Inits Tour with all graph vertices
+        if graph != None:
+            for _ in range(0, graph.number_of_cities()):
+                self.tour.append(None)
+            return
+        # Inits Tour with list
+        if tour != None:
+            self.tour = tour
+            return
 
-    # def __init__(self, tour: list):
-    #     self.tour = tour
-
-    def generate_individual(self, graph):
-        for city in graph:
+    def generate_individual(self, graph: Graph):
+        for city in range(0, graph.number_of_cities()):
             self.set_city(city, city)
         shuffle(self.tour)
     
